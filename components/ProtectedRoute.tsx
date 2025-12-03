@@ -34,5 +34,5 @@ export default function ProtectedRoute({
         return null;
     }
 
-    return <>{children}</>;
+    return <div suppressHydrationWarning>{children}</div>;
 }

@@ -4,10 +4,14 @@ import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/redux/store";
 import { logout, reset } from "@/redux/features/auth/authSlice";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const router = useRouter();
+  const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const { user } = useSelector((state: RootState) => state.auth);
 
@@ -31,20 +35,42 @@ export default function Navbar() {
             <nav className="hidden md:flex items-center gap-2 text-sm">
               <Link
                 href="/"
-                className="px-3 py-1.5 rounded-md hover:bg-gray-100 transition"
+                className={`px-3 py-1.5 rounded-md transition ${
+                  pathname === "/" ? "bg-gray-100" : "hover:bg-gray-100"
+                }`}
               >
                 Home
               </Link>
               <Link
-                href="/dashboard/student"
-                className="px-3 py-1.5 rounded-md hover:bg-gray-100 transition"
+                href="/courses"
+                className={`px-3 py-1.5 rounded-md transition ${
+                  pathname?.startsWith("/courses")
+                    ? "bg-gray-100"
+                    : "hover:bg-gray-100"
+                }`}
               >
-                My Courses
+                Courses
               </Link>
+              {user && (
+                <Link
+                  href="/dashboard/student"
+                  className={`px-3 py-1.5 rounded-md transition ${
+                    pathname?.startsWith("/dashboard/student")
+                      ? "bg-gray-100"
+                      : "hover:bg-gray-100"
+                  }`}
+                >
+                  My Courses
+                </Link>
+              )}
               {(user?.role === "admin" || user?.role === "instructor") && (
                 <Link
                   href="/dashboard/admin"
-                  className="px-3 py-1.5 rounded-md hover:bg-gray-100 transition"
+                  className={`px-3 py-1.5 rounded-md transition ${
+                    pathname?.startsWith("/dashboard/admin")
+                      ? "bg-gray-100"
+                      : "hover:bg-gray-100"
+                  }`}
                 >
                   Dashboard
                 </Link>
@@ -81,9 +107,104 @@ export default function Navbar() {
                 </button>
               </div>
             )}
+            <button
+              aria-label="Open menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav"
+              onClick={() => setMobileOpen((o) => !o)}
+              className="md:hidden p-2 rounded-md border hover:bg-gray-50 transition"
+            >
+              {mobileOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </button>
           </div>
         </div>
       </div>
+      {mobileOpen && (
+        <div id="mobile-nav" className="md:hidden border-t bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-1">
+            <Link
+              href="/"
+              onClick={() => setMobileOpen(false)}
+              className={`block px-3 py-2 rounded-md text-sm ${
+                pathname === "/" ? "bg-gray-100" : "hover:bg-gray-50"
+              }`}
+            >
+              Home
+            </Link>
+            <Link
+              href="/courses"
+              onClick={() => setMobileOpen(false)}
+              className={`block px-3 py-2 rounded-md text-sm ${
+                pathname?.startsWith("/courses")
+                  ? "bg-gray-100"
+                  : "hover:bg-gray-50"
+              }`}
+            >
+              Courses
+            </Link>
+            {user && (
+              <Link
+                href="/dashboard/student"
+                onClick={() => setMobileOpen(false)}
+                className={`block px-3 py-2 rounded-md text-sm ${
+                  pathname?.startsWith("/dashboard/student")
+                    ? "bg-gray-100"
+                    : "hover:bg-gray-50"
+                }`}
+              >
+                My Courses
+              </Link>
+            )}
+            {(user?.role === "admin" || user?.role === "instructor") && (
+              <Link
+                href="/dashboard/admin"
+                onClick={() => setMobileOpen(false)}
+                className={`block px-3 py-2 rounded-md text-sm ${
+                  pathname?.startsWith("/dashboard/admin")
+                    ? "bg-gray-100"
+                    : "hover:bg-gray-50"
+                }`}
+              >
+                Dashboard
+              </Link>
+            )}
+            {!user ? (
+              <div className="pt-2 border-t mt-2">
+                <Link
+                  href="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="block px-3 py-2 rounded-md text-sm hover:bg-gray-50"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/register"
+                  onClick={() => setMobileOpen(false)}
+                  className="block px-3 py-2 rounded-md text-sm bg-indigo-600 text-white hover:bg-indigo-700"
+                >
+                  Register
+                </Link>
+              </div>
+            ) : (
+              <div className="pt-2 border-t mt-2">
+                <button
+                  onClick={() => {
+                    setMobileOpen(false);
+                    onLogout();
+                  }}
+                  className="w-full text-left px-3 py-2 rounded-md text-sm hover:bg-gray-50"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   );
 }

@@ -112,6 +112,22 @@ export const getSubmissions = createAsyncThunk(
   }
 );
 
+export const getMySubmissionsByCourse = createAsyncThunk(
+  'assignments/getMyByCourse',
+  async (courseId: string, thunkAPI) => {
+    try {
+      const res = await api.get(`/assignments/course/${courseId}/my-submissions`);
+      return res.data as Submission[];
+    } catch (error: any) {
+      const message =
+        (error.response && error.response.data && error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const gradeSubmission = createAsyncThunk(
   'assignments/grade',
   async (
@@ -165,6 +181,9 @@ const assignmentSlice = createSlice({
         state.submissions.push(action.payload);
       })
       .addCase(getSubmissions.fulfilled, (state, action) => {
+        state.submissions = action.payload;
+      })
+      .addCase(getMySubmissionsByCourse.fulfilled, (state, action) => {
         state.submissions = action.payload;
       })
       .addCase(gradeSubmission.fulfilled, (state, action) => {

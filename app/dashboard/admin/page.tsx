@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCourses, reset } from '@/redux/features/courses/courseSlice';
 import { AppDispatch, RootState } from '@/redux/store';
@@ -87,6 +87,7 @@ export default function AdminDashboard() {
                                                         className="rounded-full mr-4"
                                                         src={course.thumbnail}
                                                         alt={course.title}
+                                                        width={70}
                                                     />
                                                     <p className="text-sm font-medium text-indigo-600 truncate">
                                                         {course.title}
@@ -115,6 +116,9 @@ export default function AdminDashboard() {
                                                             </Link>
                                                             <Link href={`/courses/${course._id}/assignments`} className="text-indigo-600 hover:text-indigo-900">
                                                                 Assignments
+                                                            </Link>
+                                                            <Link href={`/learn/${course._id}/assignments`} className="text-indigo-600 hover:text-indigo-900">
+                                                                Review Submissions
                                                             </Link>
                                                             <button
                                                                 onClick={() => handleDelete(course._id)}

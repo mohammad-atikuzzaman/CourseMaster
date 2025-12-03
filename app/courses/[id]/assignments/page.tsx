@@ -52,7 +52,12 @@ export default function CourseAssignments() {
   return (
     <ProtectedRoute allowedRoles={['user', 'admin', 'instructor']}>
       <div className="max-w-4xl mx-auto p-6">
-        <h1 className="text-2xl font-bold mb-4">Assignments for {course.title}</h1>
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="text-2xl font-bold">Assignments for {course.title}</h1>
+          {isInstructor && (
+            <a href={`/learn/${id}/assignments`} className="text-indigo-600 hover:text-indigo-800 text-sm">Review Submissions</a>
+          )}
+        </div>
 
         {isInstructor && (
           <form onSubmit={onSubmit} className="bg-white rounded-md shadow p-4 mb-6 space-y-3">
@@ -97,7 +102,7 @@ export default function CourseAssignments() {
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="font-medium">{a.title}</div>
-                      <div className="text-sm text-gray-600">Module {((a.moduleIndex ?? 0) + 1)} • Due {a.dueDate ? new Date(a.dueDate).toLocaleDateString() : '—'}</div>
+                      <div className="text-sm text-gray-600">Module {((a.moduleIndex ?? 0) + 1)} • Due {a.dueDate ? new Date(a.dueDate).toISOString().slice(0,10) : '—'}</div>
                     </div>
                   </div>
                 </li>
