@@ -125,7 +125,7 @@ export default function Home() {
           <div className="text-center lg:text-left">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm mb-6">
               <Sparkles className="h-4 w-4 text-yellow-300 mr-2" />
-              <span className="text-sm font-medium text-white">Welcome to MS Academy</span>
+              <span className="text-sm font-medium text-white">Welcome to CourseMaster</span>
             </div>
             
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight">

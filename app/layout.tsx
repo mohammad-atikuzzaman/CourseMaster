@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MS Academy",
+  title: "CourseMaster",
   description: "Learning Management System",
 };
 

@@ -34,7 +34,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t pt-6 text-sm text-gray-500">
-          © {new Date().getFullYear()} MS Academy. All rights reserved.
+          © {new Date().getFullYear()} CourseMaster. All rights reserved.
         </div>
       </div>
     </footer>

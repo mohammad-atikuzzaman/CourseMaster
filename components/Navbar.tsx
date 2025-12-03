@@ -30,7 +30,7 @@ export default function Navbar() {
               href="/"
               className="text-lg font-bold text-indigo-700 hover:text-indigo-800 transition"
             >
-              MS Academy
+             CourseMaster
             </Link>
             <nav className="hidden md:flex items-center gap-2 text-sm">
               <Link
