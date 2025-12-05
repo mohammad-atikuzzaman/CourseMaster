@@ -61,3 +61,6 @@
 **Notes**
 - Ensure backend runs at `http://localhost:8080` or update `lib/api.ts`.
 - JWT token is stored in `localStorage` on login and used for API requests.
+- For admin, instructor, student access this email should be (admin@example.com , jane@example.com, and john@example.com)
+- The password is (123456)
+- Or You can check the seeder.js file at backend for get admin, instructor and student credentials..
