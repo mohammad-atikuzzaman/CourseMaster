@@ -5,8 +5,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { getCourses, reset } from "@/redux/features/courses/courseSlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import Link from "next/link";
-import { Search, Filter, Star, Users, Clock, TrendingUp, Award, ChevronRight, Play, BookOpen, Sparkles, ArrowRight, X } from "lucide-react";
-import api from '@/lib/api';
+import {
+  Search,
+  Filter,
+  Star,
+  Users,
+  Clock,
+  TrendingUp,
+  Award,
+  ChevronRight,
+  Play,
+  BookOpen,
+  Sparkles,
+  ArrowRight,
+  X,
+} from "lucide-react";
+import api from "@/lib/api";
 import { toast } from "react-hot-toast";
 
 export default function Home() {
@@ -98,7 +112,7 @@ export default function Home() {
   useEffect(() => {
     const loadInstructors = async () => {
       try {
-        const iRes = await api.get('/instructors');
+        const iRes = await api.get("/instructors");
         setInstructors(iRes.data || []);
       } catch {}
     };
@@ -113,7 +127,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-linear-to-r from-indigo-700/50 to-transparent" />
           <div className="absolute top-0 left-0 right-0 h-96 bg-linear-to-b from-white/10 to-transparent" />
         </div>
-        
+
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
@@ -125,33 +139,36 @@ export default function Home() {
           <div className="text-center lg:text-left">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm mb-6">
               <Sparkles className="h-4 w-4 text-yellow-300 mr-2" />
-              <span className="text-sm font-medium text-white">Welcome to CourseMaster</span>
+              <span className="text-sm font-medium text-white">
+                Welcome to CourseMaster
+              </span>
             </div>
-            
+
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight">
               <span className="block text-white">Learn from the</span>
               <span className="block text-transparent bg-clip-text bg-linear-to-r from-yellow-300 to-pink-300 mt-2">
                 World's Best
               </span>
             </h1>
-            
+
             <p className="mt-6 text-xl text-indigo-100 max-w-3xl mx-auto lg:mx-0">
-              Master in-demand skills with industry-expert courses, hands-on projects, and career support.
+              Master in-demand skills with industry-expert courses, hands-on
+              projects, and career support.
             </p>
 
             <div className="mt-10 max-w-2xl mx-auto lg:mx-0">
-
-              
               <div className="mt-6 flex flex-wrap justify-center lg:justify-start gap-3">
-                {["Web Development", "Data Science", "UI/UX", "Business"].map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setCategory(cat)}
-                    className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm font-medium hover:bg-white/20 transition-colors"
-                  >
-                    {cat}
-                  </button>
-                ))}
+                {["Web Development", "Data Science", "UI/UX", "Business"].map(
+                  (cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setCategory(cat)}
+                      className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm font-medium hover:bg-white/20 transition-colors"
+                    >
+                      {cat}
+                    </button>
+                  )
+                )}
               </div>
             </div>
 
@@ -191,7 +208,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          
+
           <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100 transform hover:-translate-y-1 transition-all duration-300">
             <div className="flex items-center">
               <div className="p-3 rounded-lg bg-blue-100">
@@ -203,7 +220,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          
+
           <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100 transform hover:-translate-y-1 transition-all duration-300">
             <div className="flex items-center">
               <div className="p-3 rounded-lg bg-purple-100">
@@ -222,21 +239,22 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900">Popular Categories</h2>
+            <h2 className="text-3xl font-bold text-gray-900">
+              Popular Categories
+            </h2>
             <p className="mt-2 text-gray-600">Explore courses by category</p>
           </div>
-          
         </div>
-        
+
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setCategory(cat)}
               className={`p-4 rounded-xl border-2 transition-all duration-300 transform hover:scale-105 ${
-                category === cat 
-                  ? 'border-indigo-500 bg-indigo-50 shadow-lg' 
-                  : 'border-gray-200 hover:border-indigo-300 hover:shadow-md'
+                category === cat
+                  ? "border-indigo-500 bg-indigo-50 shadow-lg"
+                  : "border-gray-200 hover:border-indigo-300 hover:shadow-md"
               }`}
             >
               <div className="text-center">
@@ -253,10 +271,12 @@ export default function Home() {
       {/* Filters Bar */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         <div className="bg-white rounded-2xl shadow-lg p-6">
+          {/* Top Controls */}
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-            <div className="flex-1">
-              <div className="relative max-w-xl">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+            {/* Search Bar */}
+            <div className="flex-1 w-full">
+              <div className="relative w-full">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                 <input
                   type="text"
                   className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition"
@@ -266,18 +286,21 @@ export default function Home() {
                 />
               </div>
             </div>
-            
-            <div className="flex items-center gap-4">
+
+            {/* Buttons + Sort */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
+              {/* Filter Button */}
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="flex items-center gap-2 px-4 py-3 rounded-xl border border-gray-200 hover:border-indigo-300 hover:bg-indigo-50 transition"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-gray-200 hover:border-indigo-300 hover:bg-indigo-50 transition w-full sm:w-auto"
               >
                 <Filter className="h-5 w-5 text-gray-600" />
                 <span className="font-medium">Filters</span>
               </button>
-              
+
+              {/* Sort Select */}
               <select
-                className="px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition"
+                className="px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition w-full sm:w-auto"
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
               >
@@ -286,7 +309,8 @@ export default function Home() {
                 <option value="price-desc">Price: High to Low</option>
                 <option value="rating">Highest Rated</option>
               </select>
-              
+
+              {/* Reset Button */}
               <button
                 onClick={() => {
                   setSearchTerm("");
@@ -296,18 +320,21 @@ export default function Home() {
                   setSort("");
                   setCurrentPage(1);
                 }}
-                className="px-4 py-3 rounded-xl border border-gray-200 hover:border-red-300 hover:bg-red-50 text-red-600 transition"
+                className="px-4 py-3 rounded-xl border border-gray-200 hover:border-red-300 hover:bg-red-50 text-red-600 transition w-full sm:w-auto flex justify-center"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
           </div>
-          
+
           {/* Advanced Filters */}
           {showFilters && (
             <div className="mt-6 pt-6 border-t border-gray-200 grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Category */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Category
+                </label>
                 <select
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition"
                   value={category}
@@ -315,31 +342,37 @@ export default function Home() {
                 >
                   <option value="">All Categories</option>
                   {categories.map((cat) => (
-                    <option key={cat} value={cat}>{cat}</option>
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
                   ))}
                 </select>
               </div>
-              
+
+              {/* Price Range */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Price Range</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Price Range
+                </label>
                 <div className="flex gap-2">
                   <input
                     type="number"
                     placeholder="Min"
-                    className="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition"
+                    className="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition w-0.5"
                     value={minPrice}
                     onChange={(e) => setMinPrice(e.target.value)}
                   />
                   <input
                     type="number"
                     placeholder="Max"
-                    className="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition"
+                    className="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition w-0.5"
                     value={maxPrice}
                     onChange={(e) => setMaxPrice(e.target.value)}
                   />
                 </div>
               </div>
-              
+
+              {/* Apply Button */}
               <div className="flex items-end">
                 <button
                   onClick={handleSearch}
@@ -357,12 +390,19 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900">Featured Courses</h2>
+            <h2 className="text-3xl font-bold text-gray-900">
+              Featured Courses
+            </h2>
             <p className="mt-2 text-gray-600">Latest picks from our catalog</p>
           </div>
           <div className="flex items-center gap-4">
-            <div className="text-sm text-gray-500">Showing {courses.length} of {total}</div>
-            <Link href="/courses" className="text-indigo-600 hover:text-indigo-700 font-medium flex items-center">
+            <div className="text-sm text-gray-500">
+              Showing {courses.length} of {total}
+            </div>
+            <Link
+              href="/courses"
+              className="text-indigo-600 hover:text-indigo-700 font-medium flex items-center"
+            >
               View all <ChevronRight className="h-4 w-4 ml-1" />
             </Link>
           </div>
@@ -371,7 +411,10 @@ export default function Home() {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="bg-white rounded-2xl shadow-lg overflow-hidden animate-pulse">
+              <div
+                key={i}
+                className="bg-white rounded-2xl shadow-lg overflow-hidden animate-pulse"
+              >
                 <div className="h-48 bg-linear-to-r from-gray-200 to-gray-300" />
                 <div className="p-6 space-y-4">
                   <div className="h-4 w-1/3 bg-gray-200 rounded" />
@@ -384,7 +427,9 @@ export default function Home() {
           </div>
         ) : isError ? (
           <div className="text-center py-16">
-            <div className="text-red-500 text-lg font-semibold">Failed to load courses</div>
+            <div className="text-red-500 text-lg font-semibold">
+              Failed to load courses
+            </div>
             <p className="text-gray-600 mt-2">{message}</p>
             <button
               onClick={() => window.location.reload()}
@@ -394,9 +439,16 @@ export default function Home() {
             </button>
           </div>
         ) : (
-          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-opacity duration-500 ${mounted ? "opacity-100" : "opacity-0"}`}>
+          <div
+            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-opacity duration-500 ${
+              mounted ? "opacity-100" : "opacity-0"
+            }`}
+          >
             {courses.map((course) => (
-              <div key={course._id} className="group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+              <div
+                key={course._id}
+                className="group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+              >
                 <div className="relative overflow-hidden">
                   <img
                     src={course.thumbnail}
@@ -411,11 +463,13 @@ export default function Home() {
                   <div className="absolute top-4 right-4">
                     <div className="flex items-center gap-1 px-3 py-1 bg-black/70 backdrop-blur-sm rounded-full">
                       <Star className="h-3 w-3 text-yellow-400 fill-current" />
-                      <span className="text-sm font-medium text-white">4.8</span>
+                      <span className="text-sm font-medium text-white">
+                        4.8
+                      </span>
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <h3 className="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors line-clamp-2">
@@ -423,11 +477,15 @@ export default function Home() {
                         {course.title}
                       </Link>
                     </h3>
-                    <div className="text-2xl font-bold text-indigo-600">${course.price}</div>
+                    <div className="text-2xl font-bold text-indigo-600">
+                      ${course.price}
+                    </div>
                   </div>
-                  
-                  <p className="text-gray-600 mb-6 line-clamp-2">{course.description}</p>
-                  
+
+                  <p className="text-gray-600 mb-6 line-clamp-2">
+                    {course.description}
+                  </p>
+
                   <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                     <div className="flex items-center gap-2">
                       <Users className="h-4 w-4" />
@@ -438,7 +496,7 @@ export default function Home() {
                       <span>12 hours</span>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="h-10 w-10 rounded-full bg-linear-to-r from-indigo-100 to-purple-100 flex items-center justify-center">
@@ -447,12 +505,16 @@ export default function Home() {
                         </span>
                       </div>
                       <div>
-                        <div className="font-medium text-gray-900">{course.instructor?.name || "Instructor"}</div>
-                        <div className="text-sm text-gray-500">Senior Developer</div>
+                        <div className="font-medium text-gray-900">
+                          {course.instructor?.name || "Instructor"}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          Senior Developer
+                        </div>
                       </div>
                     </div>
-                    
-                    <Link 
+
+                    <Link
                       href={`/courses/${course._id}`}
                       className="px-4 py-2 bg-linear-to-r from-indigo-50 to-purple-50 text-indigo-600 font-medium rounded-lg hover:from-indigo-100 hover:to-purple-100 transition flex items-center gap-2"
                     >
@@ -480,7 +542,7 @@ export default function Home() {
               >
                 Previous
               </button>
-              
+
               {Array.from({ length: Math.min(5, pages) }).map((_, i) => {
                 const pageNum = i + 1;
                 return (
@@ -489,19 +551,17 @@ export default function Home() {
                     onClick={() => goToPage(pageNum)}
                     className={`px-4 py-2 rounded-lg transition ${
                       currentPage === pageNum
-                        ? 'bg-indigo-600 text-white'
-                        : 'border border-gray-200 hover:border-indigo-500 hover:bg-indigo-50'
+                        ? "bg-indigo-600 text-white"
+                        : "border border-gray-200 hover:border-indigo-500 hover:bg-indigo-50"
                     }`}
                   >
                     {pageNum}
                   </button>
                 );
               })}
-              
-              {pages > 5 && (
-                <span className="px-2">...</span>
-              )}
-              
+
+              {pages > 5 && <span className="px-2">...</span>}
+
               <button
                 disabled={currentPage >= pages}
                 onClick={() => goToPage(currentPage + 1)}
@@ -514,38 +574,64 @@ export default function Home() {
         )}
       </main>
 
-
-
       {/* Instructors */}
       <section className="py-16 bg-linear-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900">Meet Our Instructors</h2>
-            <p className="mt-4 text-gray-600">Industry experts with real-world experience</p>
+            <h2 className="text-3xl font-bold text-gray-900">
+              Meet Our Instructors
+            </h2>
+            <p className="mt-4 text-gray-600">
+              Industry experts with real-world experience
+            </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {instructors.map((ins) => (
-              <div key={ins._id} className="group bg-white rounded-2xl shadow-lg p-6 border border-gray-100 hover:shadow-2xl transition-all">
-                <div className="flex items-center gap-4">
-                  <div className="h-14 w-14 rounded-full bg-linear-to-r from-indigo-100 to-purple-100 flex items-center justify-center">
-                    <span className="text-xl font-bold text-indigo-600">{(ins.name || 'I').split(' ').map(n => n[0]).join('')}</span>
+              <div
+                key={ins._id}
+                className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-indigo-300 transition-all duration-300 hover:shadow-xl"
+              >
+                <div className="flex items-start gap-4">
+                  {/* Modern avatar */}
+                  <div className="h-14 w-14 rounded-xl bg-linear-to-br from-indigo-500 to-purple-500 p-0.5">
+                    <div className="h-full w-full rounded-xl bg-white flex items-center justify-center">
+                      <span className="text-xl font-bold bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                        {(ins.name || "I")
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
+                      </span>
+                    </div>
                   </div>
-                  <div>
-                    <div className="font-semibold text-gray-900">{ins.name}</div>
-                    <div className="text-xs text-gray-500">{ins.email}</div>
+
+                  <div className="flex-1">
+                    <div>
+                      <h3 className="font-bold text-gray-900 text-lg">
+                        {ins.name}
+                      </h3>
+                      <p className="text-sm text-gray-500 mt-0.5">
+                        {ins.email}
+                      </p>
+                    </div>
+
+                    {/* Floating stats badge */}
+                    <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-indigo-50 to-purple-50 rounded-lg border border-indigo-100 group-hover:border-indigo-200 transition-colors">
+                      <Users className="h-4 w-4 text-indigo-600" />
+                      <span className="font-semibold text-gray-900">
+                        {ins.courses}{" "}
+                        <span className="text-gray-600 text-sm font-normal">
+                          courses
+                        </span>
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-4 flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Users className="h-4 w-4 text-gray-500" />
-                    <span>Courses: {ins.courses}</span>
-                  </div>
-                  <button className="px-3 py-1.5 rounded-lg border border-gray-200 text-sm text-gray-700 hover:bg-gray-50">View Profile</button>
                 </div>
               </div>
             ))}
             {instructors.length === 0 && (
-              <div className="text-center text-gray-500 col-span-full">No instructors found</div>
+              <div className="text-center text-gray-500 col-span-full">
+                No instructors found
+              </div>
             )}
           </div>
         </div>
@@ -560,7 +646,8 @@ export default function Home() {
                 Start Your Learning Journey Today
               </h2>
               <p className="text-xl text-indigo-100 mb-8 max-w-2xl mx-auto">
-                Join thousands of students who have transformed their careers with our courses
+                Join thousands of students who have transformed their careers
+                with our courses
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link

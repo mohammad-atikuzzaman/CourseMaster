@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MS Academy Frontend
 
-## Getting Started
+**Overview**
+- Next.js App Router UI for courses, learning, assignments, dashboard.
+- Global Redux Toolkit state for auth, courses, enrollments, assignments.
+- Axios client with JWT interceptor and API base `http://localhost:8080/api`.
 
-First, run the development server:
+**Tech Stack**
+- Next.js 16, React 19
+- Redux Toolkit, React Redux
+- Tailwind CSS
+- Lucide icons, react-hot-toast
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Setup**
+- Requirements: Node 18+
+- Install: `npm install`
+- Development: `npm run dev` (http://localhost:3000)
+- Lint: `npm run lint`
+- Build: `npm run build` → `npm start`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Configuration**
+- API base in `lib/api.ts`:
+  - `baseURL: 'http://localhost:8080/api'`
+  - JWT added from `localStorage` into `Authorization` header automatically.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Key Paths**
+- `app/layout.tsx` – global layout, ReduxProvider, Navbar, Footer
+- `app/page.tsx` – home, featured courses
+- `app/courses` – listing and course detail pages
+- `app/dashboard` – student and admin/instructor dashboards
+- `app/learn/[courseId]` – course player, modules, assignments entry
+- `app/learn/[courseId]/assignments` – submissions review and grading (admin/instructor)
+- `(auth)/login`, `(auth)/register` – authentication
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**State Slices**
+- `redux/features/auth/authSlice.ts` – login/register/logout, stores user/token
+- `redux/features/courses/courseSlice.ts` – courses list/detail
+- `redux/features/enrollments/enrollmentSlice.ts` – my enrollments, progress
+- `redux/features/assignments/assignmentSlice.ts` – assignments, submissions, grading
 
-## Learn More
+**Navigation**
+- Navbar with links: Home, Courses, My Courses, Dashboard (for admin/instructor); mobile menu included.
+- Active route highlighting and responsive behavior.
 
-To learn more about Next.js, take a look at the following resources:
+**Learning & Assignments**
+- Course player shows modules and progress; students submit `repoUrl`/`deploymentUrl`.
+- Review page lets admin/instructor load submissions and set scores.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Usage Flow**
+- Register or login
+- Browse courses and enroll
+- Learn modules, mark complete → progress updates
+- Submit assignment from player
+- Instructors/Admins review submissions and grade
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Accessibility & UX**
+- Mobile menus and module lists for small screens
+- Deterministic date rendering to avoid hydration mismatch
+- Toasts enabled
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Notes**
+- Ensure backend runs at `http://localhost:8080` or update `lib/api.ts`.
+- JWT token is stored in `localStorage` on login and used for API requests.
