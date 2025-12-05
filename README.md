@@ -1,4 +1,4 @@
-# MS Academy Frontend
+# CourseMaster Frontend
 
 **Overview**
 - Next.js App Router UI for courses, learning, assignments, dashboard.
